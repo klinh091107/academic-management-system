@@ -40,7 +40,7 @@ public class TaskExecute {
             return;
         }
 
-        // Check student validation
+        // Check validation and existence
         if (!exists("SELECT 1 FROM StudentEnrolment WHERE StudentID = ?", studentId)) {
             System.out.println("No student found with ID: " + studentId);
             return;
@@ -71,11 +71,6 @@ public class TaskExecute {
                 // Display result
                 System.out.println(enrollment);
             }
-
-            // Handle case when no data is found
-            if (!found) {
-                System.out.println("No modules data found for student ID " + studentId);
-            }
         }
     }
 
@@ -87,7 +82,7 @@ public class TaskExecute {
             return;
         }
 
-        // Check module exists
+        // Check validation and existence
         if (!exists("SELECT 1 FROM Module WHERE ModuleID = ?", moduleId)) {
             System.out.println("No module found with ID: " + moduleId);
             return;
@@ -117,10 +112,11 @@ public class TaskExecute {
             return;
         }
 
-        // Check validation
+        // Check validation and existence
         boolean studentExists = exists("SELECT 1 FROM StudentEnrolment WHERE StudentID = ?", studentId);
         boolean moduleExists = exists("SELECT 1 FROM Module WHERE ModuleID = ?", moduleId);
 
+        //Handle validation and existence case
         if (!studentExists && !moduleExists) {
             System.out.println("No student and module found with given IDs");
             return;
@@ -177,7 +173,7 @@ public class TaskExecute {
             return;
         }
 
-        // Check validation
+        // Check validation and existence
         boolean studentExists = exists("SELECT 1 FROM StudentEnrolment WHERE StudentID = ?", studentId);
         boolean moduleExists = exists("SELECT 1 FROM Module WHERE ModuleID = ?", moduleId);
 
@@ -186,7 +182,7 @@ public class TaskExecute {
                 assessmentId, moduleId, studentId
         );
 
-        // Handle invalid cases
+        // Handle validation and existence cases
         if (!studentExists && !moduleExists) {
             System.out.println("No student and module found with given IDs");
             return;
@@ -263,11 +259,11 @@ public class TaskExecute {
             return;
         }
 
-        // Check validation
+        // Check validation and existence
         boolean studentExists = exists("SELECT 1 FROM StudentEnrolment WHERE StudentID = ?", studentId);
         boolean moduleExists = exists("SELECT 1 FROM Module WHERE ModuleID = ?", moduleId);
 
-        // Handle invalid cases
+        // Handle validation and existence cases
         if (!studentExists && !moduleExists) {
             System.out.println("No student and module found with given IDs");
             return;
@@ -295,7 +291,7 @@ public class TaskExecute {
             return;
         }
 
-        // Handle invalid input
+        // Check validation and existence
         if (!exists("SELECT 1 FROM StudentEnrolment WHERE StudentID = ?", studentId)) {
             System.out.println("No student found with ID: " + studentId);
             return;
