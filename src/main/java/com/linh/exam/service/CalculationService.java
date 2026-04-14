@@ -31,14 +31,21 @@ public class CalculationService {
             ResultSet rs = st.executeQuery();
 
             double total = 0;
+            boolean hasMissingAssessment = false;
 
             // Retrieve modules and calculate final mark for each assessment
             while (rs.next()) {
                 String type = rs.getString("AssessmentType");
+
                 double mark = rs.getDouble("AwardedMarks");
                 double max = rs.getDouble("MaximumMarks");
                 double weight = rs.getDouble("Weighting");
                 int assessmentId = rs.getInt("AssessmentID");
+
+                // Check if any assessment was not submitted
+                if (mark == 0) {
+                    return 0;
+                }
 
                 Assessment assessment;
 

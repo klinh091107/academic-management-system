@@ -280,7 +280,13 @@ public class TaskExecute {
 
         // Display result
         System.out.println("MODULE " + moduleId + " SCORE");
-        System.out.printf("Student ID: %d - Final Module Mark: %.1f%n", studentId, mark);
+
+        // If any assessment was not submit -> module fail
+        if (mark == 0) {
+            System.out.println("Module " + moduleId + " FAILED (do not submit all assessments)");
+        } else {
+            System.out.printf("Student ID: %d - Final Module Mark: %.1f%n", studentId, mark);
+        }
     }
 
     // TASK 6: FINAL DEGREE CLASSIFICATION
@@ -321,6 +327,13 @@ public class TaskExecute {
 
                 // Calculate final mark for the given student and module
                 double mark = calculator.calculateModuleMark(studentId, moduleId);
+
+                // If any module fail -> Fail
+                if (mark == 0) {
+                    System.out.println("FINAL DEGREE CLASSIFICATION");
+                    System.out.println("FAIL (Module " + moduleId + " failed)");
+                    return;
+                }
 
                 moduleMarks.put(moduleId, mark);
                 moduleLevels.put(moduleId, level);
